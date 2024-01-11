@@ -30,8 +30,7 @@ public class UI
         return scanner.next();
     }
 
-    public int getMoveRow(int whoseMove, String xName, String oName) {
-        int row;
+    public int getMoveRow(int whoseMove, String xName, String oName, int row) {
         while (row <= 0 || row >= 4) {
             try {
                 System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
@@ -43,8 +42,7 @@ public class UI
         return row;
     }
 
-    public int getMoveCol(int whoseMove, String xName, String oName) {
-        int col;
+    public int getMoveCol(int whoseMove, String xName, String oName, int col) {
         while (col <= 0 || col >= 4) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
@@ -84,11 +82,11 @@ public class UI
     }
 
     public void printMove(State state, int row, int col) {
-        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()),getPlayerName(state.getWhoseMove(), state.xName(), state.oName()), row, col);
+        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()),getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), row, col);
     } 
 
     public void printWinner(State state, String xName, String oName) {
-        System.out.printf(Constants.WINNER, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.xName(), state.oName()));
+        System.out.printf(Constants.WINNER, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()));
     }
 
     public void printTieGame() {
