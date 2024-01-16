@@ -1,7 +1,6 @@
 package tictactoe;
 
 public class EventLoop {
-
     // Instance variables for the UI and State classes
     State state = new State();
     UI ui = new UI();
@@ -33,9 +32,8 @@ public class EventLoop {
                 if (ui.isLegalMove(state, row, col)) {
                     state.setGameState(Constants.MAKE_MOVE);
                 }
-
+                
             } else if (gameState == Constants.GET_O_MOVE) {
-                ui.printBoard(state);
                 row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName(), row);
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName(), row);
                 if (ui.isLegalMove(state, row, col)) {
@@ -81,7 +79,7 @@ public class EventLoop {
 
             } else if (gameState == Constants.GAME_OVER) {
                 if (ui.startNewGame()) {
-
+                    
                     state.setGameState(Constants.STANDBY);
                 } else {
                     state.setGameState(Constants.QUIT_PROGRAM);
