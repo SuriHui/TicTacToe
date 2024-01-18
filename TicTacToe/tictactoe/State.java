@@ -39,8 +39,9 @@ public class State
         return true;
     }
     
+    
     public int getGameState() {
-        return this.gameState;
+        return gameState;
     }
     
     public void setGameState(int gameState) {
@@ -48,7 +49,7 @@ public class State
     }
     
     public int getWhoseMove() {
-        return this.whoseMove;
+        return whoseMove;
     }
     
     public void setWhoseMove(int whoseMove) {
@@ -56,7 +57,7 @@ public class State
     }
     
     public String getXName() {
-        return this.xName;
+        return xName;
     }
     
     public void setXName(String xName) {
@@ -64,7 +65,7 @@ public class State
     }
     
     public String getOName() {
-        return this.oName;
+        return oName;
     }
     
     public void setOName(String oName) {
@@ -72,7 +73,7 @@ public class State
     }
     
     public int getBoardCell(int row, int col) {
-       return this.board[row][col]; 
+       return board[row][col];
     }
     
     public void setBoardCell(int row, int col, int value) {

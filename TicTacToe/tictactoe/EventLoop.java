@@ -36,6 +36,7 @@ public class EventLoop {
             } else if (gameState == Constants.GET_O_MOVE) {
                 row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName(), row);
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName(), row);
+                ui.printBoard(state);
                 if (ui.isLegalMove(state, row, col)) {
                     state.setGameState(Constants.MAKE_MOVE);
                 }
