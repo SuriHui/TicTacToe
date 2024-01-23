@@ -10,7 +10,7 @@ public class State
     private String xName = "";
     private String oName = "";
     private int[][] board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
-    
+
     public boolean isWinner() {
         int total;
         for (int row=0; row<Constants.BOARD_SIZE; row++) {
@@ -27,7 +27,7 @@ public class State
         if (total == -3 || total == 3) return true;
         return false;
     }
-    
+
     public boolean isTie() {
         for (int row=0; row<Constants.BOARD_SIZE; row++) {
             for (int col=0; col<Constants.BOARD_SIZE; col++) {
@@ -38,45 +38,45 @@ public class State
         }
         return true;
     }
-    
-    
+
     public int getGameState() {
         return gameState;
     }
-    
+
     public void setGameState(int gameState) {
         this.gameState = gameState;
     }
-    
+
     public int getWhoseMove() {
         return whoseMove;
     }
-    
+
     public void setWhoseMove(int whoseMove) {
         this.whoseMove = whoseMove;
     }
-    
+
     public String getXName() {
         return xName;
     }
-    
+
     public void setXName(String xName) {
         this.xName = xName;
     }
-    
+
     public String getOName() {
         return oName;
     }
-    
+
     public void setOName(String oName) {
         this.oName = oName;
     }
-    
+
     public int getBoardCell(int row, int col) {
-       return board[row][col];
+        return this.board[row][col];
     }
-    
+
     public void setBoardCell(int row, int col, int value) {
         this.board[row][col] = value;
     }
+
 }

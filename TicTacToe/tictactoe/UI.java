@@ -4,14 +4,17 @@ import java.util.Scanner;
  * UI class
  */
 public class UI
-{    
+{
+
     Scanner scanner;
+
     public UI() {
         scanner = new Scanner(System.in);         
     }
+
     // Utility methods
     public String getXOrO(int whoseMove) {
-        if (whoseMove == -1 ) {
+        if (whoseMove == -1) {
             return "X";
         } else if (whoseMove == 1) {
             return "O";
@@ -20,14 +23,14 @@ public class UI
         }
     }
 
-    public String getPlayerName(int whoseMove, String xName, String oName) {
-        return (whoseMove == -1) ? xName : oName;
+    public String getPlayerName(int whoseMove, String xName, String yName) {
+        return (whoseMove == -1) ? xName : yName;
     }
 
     public boolean isLegalMove(State state, int row, int col) {
         return 1 <= row && row <= Constants.BOARD_SIZE &&
         1 <= col && col <= Constants.BOARD_SIZE &&
-        state.getBoardCell(row-1, col-1) == Constants.BLANK;
+        state.getBoardCell(row, col) == Constants.BLANK;
     }
 
     // Prompt for input methods
@@ -36,22 +39,25 @@ public class UI
         return scanner.next();
     }
 
-    public int getMoveRow(int whoseMove, String xName, String oName, int row) {
+    public int getMoveRow(int whoseMove, String xName, String oName) {
+        int row = 0;
         while (row <= 0 || row >= 4) {
             try {
                 System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 row = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
+                System.out.println(Constants.INVALID_MOVE_ERROR);
             }
         }
         return row;
     }
 
-    public int getMoveCol(int whoseMove, String xName, String oName, int col) {
+    public int getMoveCol(int whoseMove, String xName, String oName) {
+        int col = 0;
         while (col <= 0 || col >= 4) {
             try {
-                System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
+                System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName , oName));
                 col = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
@@ -89,12 +95,22 @@ public class UI
     }
 
     public void printMove(State state, int row, int col) {
-        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()),getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), row, col);
-        System.out.println();
+        System.out.printf(
+            Constants.PRINT_MOVE, 
+            getXOrO(state.getWhoseMove()),
+            getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), 
+            row, 
+            col
+        );
+        System.out.println(); 
     } 
 
-    public void printWinner(State state, String xName, String oName) {
-        System.out.printf(Constants.WINNER, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()));
+    public void printWinner(State state) {
+        System.out.printf(
+            Constants.WINNER, 
+            getXOrO(state.getWhoseMove()),
+            getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName())
+        );
         System.out.println();
     }
 
