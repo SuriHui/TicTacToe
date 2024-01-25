@@ -1,5 +1,6 @@
 package tictactoe;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 /**
  * UI class
  */
@@ -21,6 +22,7 @@ public class UI
         } else {
             return " ";
         }
+
     }
 
     public String getPlayerName(int whoseMove, String xName, String yName) {
@@ -28,42 +30,65 @@ public class UI
     }
 
     public boolean isLegalMove(State state, int row, int col) {
-        return 1 <= row && row <= Constants.BOARD_SIZE &&
-        1 <= col && col <= Constants.BOARD_SIZE &&
-        state.getBoardCell(row, col) == Constants.BLANK;
+        if (isLegalMove(state, row, col)) {
+            // The move is legal, proceed with updating the game state.
+            printInvalidMove(row, col);
+            System.out.println();
+            scanner.nextLine();
+            return 
+            // Other game logic...
+        } else {
+            return 1 <= row &&row <= Constants.BOARD_SIZE &&
+            1 <= col && col <= Constants.BOARD_SIZE &&
+            state.getBoardCell(row -1, col- 1) == Constants.BLANK;
+        } 
     }
-
-    // Prompt for input methods
-    public String promptForName(String player) {
+        // Prompt for input methods
+        public String promptForName(String player) {
         System.out.printf(Constants.GET_PLAYER_NAME, player);
         return scanner.next();
     }
 
     public int getMoveRow(int whoseMove, String xName, String oName) {
         int row = 0;
-        while (row <= 0 || row >= 4) {
+        while (true) {
+            System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove,xName, oName));
             try {
-                System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 row = scanner.nextInt();
-            } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                System.out.println(Constants.INVALID_MOVE_ERROR);
+                if (row < 1 || row > Constants.BOARD_SIZE) {
+                    printInvalidRowOrColumn();
+                    System.out.println();
+                    scanner.nextLine();
+                }else{
+                    return row;
+                }
+            } catch (InputMismatchException error) {
+                printInvalidRowOrColumn();
+                System.out.println();
             }
         }
-        return row;
     }
 
     public int getMoveCol(int whoseMove, String xName, String oName) {
         int col = 0;
-        while (col <= 0 || col >= 4) {
+        while (true) {
+            System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
             try {
-                System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName , oName));
                 col = scanner.nextInt();
-            } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
+                if (col < 1 || col > Constants.BOARD_SIZE) {
+                    printInvalidRowOrColumn();
+                    System.out.println();
+                    scanner.nextLine();
+                }
+                else {
+                    return col;
+                }
+            } catch (InputMismatchException error) {
+                printInvalidRowOrColumn();
+                System.out.println();
+                scanner.nextLine();
             }
         }
-        return col;
     }
 
     public boolean startNewGame() {
