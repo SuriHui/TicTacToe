@@ -30,17 +30,13 @@ public class UI
     }
 
     public boolean isLegalMove(State state, int row, int col) {
-        if (isLegalMove(state, row, col)) {
-            // The move is legal, proceed with updating the game state.
-            printInvalidMove(row, col);
-            System.out.println();
-            scanner.nextLine();
-            return 
-            // Other game logic...
-        } else {
-            return 1 <= row &&row <= Constants.BOARD_SIZE &&
+        if (1 <= row &&row <= Constants.BOARD_SIZE &&
             1 <= col && col <= Constants.BOARD_SIZE &&
-            state.getBoardCell(row -1, col- 1) == Constants.BLANK;
+            state.getBoardCell(row -1, col- 1) == Constants.BLANK) {
+            return true;
+        } else {
+            System.out.println(Constants.INVALID_MOVE_ERROR);
+            return false;
         } 
     }
         // Prompt for input methods
@@ -59,7 +55,7 @@ public class UI
                     printInvalidRowOrColumn();
                     System.out.println();
                     scanner.nextLine();
-                }else{
+                } else{
                     return row;
                 }
             } catch (InputMismatchException error) {
@@ -131,6 +127,7 @@ public class UI
     } 
 
     public void printWinner(State state) {
+        printBoard(state);
         System.out.printf(
             Constants.WINNER, 
             getXOrO(state.getWhoseMove()),
@@ -139,7 +136,12 @@ public class UI
         System.out.println();
     }
 
-    public void printTieGame() {
+    public void printTieGame(State state) {
+        printBoard(state);
         System.out.println(Constants.TIE_GAME);
+    }
+    
+    public void resetBoard() {
+        
     }
 }

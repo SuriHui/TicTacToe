@@ -64,7 +64,7 @@ public class EventLoop {
 
       } else if (gameState == Constants.CHECK_IF_TIE) {
         if (state.isTie()) {
-          ui.printTieGame();
+          ui.printTieGame(state);
           state.setGameState(Constants.GAME_OVER);
         } else {
           state.setWhoseMove(state.getWhoseMove() * -1);
@@ -82,11 +82,9 @@ public class EventLoop {
       } else if (gameState == Constants.O_WINS) {
         ui.printWinner(state);
         state.setGameState(Constants.GAME_OVER);
-        
 
       } else if (gameState == Constants.GAME_OVER) {
         if (ui.startNewGame()) {
-
           state.setGameState(Constants.STANDBY);
         } else {
          state.setGameState(Constants.QUIT_PROGRAM);
