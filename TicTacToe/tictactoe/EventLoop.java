@@ -17,7 +17,11 @@ public class EventLoop {
       int gameState = state.getGameState();
       if (gameState == Constants.STANDBY) {
         state.setGameState(Constants.GET_X_NAME);
-
+        for (int i = 0; i <= 2; i++) {
+            for (int j = 0; j <= 2; j++) {
+                state.setBoardCell(i, j, 0);
+            }
+        }
       } else if (gameState == Constants.GET_X_NAME) {
         state.setXName(ui.promptForName("X"));
         state.setGameState(Constants.GET_O_NAME);
